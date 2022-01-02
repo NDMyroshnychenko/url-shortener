@@ -1,0 +1,18 @@
+.navbar {
+    padding-top: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.main-wrapper {
+    padding: 35px 50px 5px 50px;
+}
+.button-remove {
+    /*float:right*/
+}
+.column-original {
+    width: 45%;
+}
+.list-urls-wrapper{
+    margin-top: 50px;
+}
+
