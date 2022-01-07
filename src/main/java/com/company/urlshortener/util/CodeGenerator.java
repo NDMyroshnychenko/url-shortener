@@ -1,7 +1,6 @@
 package com.company.urlshortener.util;
 
 import org.apache.commons.text.RandomStringGenerator;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -18,7 +17,6 @@ public class CodeGenerator {
         return randomStringGenerator.generate(length);
     }
 
-    //проверяем
     private static boolean isLatinLetterOrDigit(int codePoint) {
         return ('a' <= codePoint && codePoint <= 'z')
                 || ('A' <= codePoint && codePoint <= 'Z')
@@ -26,8 +24,6 @@ public class CodeGenerator {
                 || ('+' == codePoint)
                 || ('_' == codePoint)
                 || ('-' == codePoint);
-
     }
-
 }
 
