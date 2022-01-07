@@ -12,10 +12,9 @@
 <div class="page-wrapper">
     <div class="header">
         <nav class="navbar navbar-light bg-light">
-            <a class="navbar-brand" href="#">Shortener</a>
+            <a class="navbar-brand" href="#" th:href="@{/}">Shortener</a>
             <div class="navbar-text">
-                <button class="btn btn-outline-primary" type="button">Sign in</button>
-                <button class="btn btn-primary" type="button">Sign up</button>
+                <a class="btn btn-outline-dark" th:href="@{/logout}">Logout</a></li>
             </div>
         </nav>
     </div>
@@ -53,16 +52,13 @@
                 </thead>
                 <tbody>
                 <tr th:each="shortUrl, custStat: ${listShortUrls}">
-                    <td th:text="${custStat.index}">
+                    <td th:text="${custStat.index+1}">
                     <td class="column-original" th:text="${shortUrl.getOriginalUrl()}"></td>
                     <td th:text="${#httpServletRequest.scheme}+'://'+${#httpServletRequest.serverName}+':'+${#httpServletRequest.serverPort}+'/'+${shortUrl.hash}"></td>
                     <td class="column-option">
-<!--                        <div class="btn btn-success">Copy</div>-->
-                        <form action="#"  th:action="@{'delete/{hash}'(hash=${shortUrl.hash})}" th:method="POST" >
-<!--                            <input type="hidden" name="_method" value="delete" />-->
+                        <form action="#" th:action="@{'delete/{hash}'(hash=${shortUrl.hash})}" th:method="POST">
                             <button class="btn btn-outline-dark" type="submit"> Delete</button>
                         </form>
-<!--                        <a class="btn btn-outline-dark" href="#">Delete</a>-->
                     </td>
                 </tr>
                 </tbody>
@@ -71,7 +67,7 @@
     </div>
 </div>
 
-<div th:if="${#lists.isEmpty(listShortUrls)}">
+<div class="no-urls" th:if="${#lists.isEmpty(listShortUrls)}">
     No short urls
 </div>
 </body>
