@@ -1,7 +1,10 @@
 package com.company.urlshortener.shortUrlService.model;
 
-import com.company.urlshortener.authService.model.User;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -34,7 +37,7 @@ public class ShortUrl {
     @Column(name = "created_at", columnDefinition = "TIMESTAMP")
     private ZonedDateTime createdAt;
 
-    public static ShortUrl create(String hash,String originalUrl) {
+    public static ShortUrl create(String hash, String originalUrl) {
         return ShortUrl.builder()
                 .hash(hash)
                 .originalUrl(originalUrl)
