@@ -19,27 +19,29 @@ public class ShortUrlService {
     @Autowired
     private ShortUrlRepository repository;
 
-    private Logger logger = LoggerFactory.getLogger(ShortUrlService.class);
-
     public String createShortUrl(String original) {
         if (original == null) {
             return null;
         }
+        ShortUrl shortUrlByOriginal = findByOriginal(original);
+
+        if (shortUrlByOriginal != null) {
+            return shortUrlByOriginal.getHash();
+        }
         int shorterLength = 6;
         String hash = codeGenerator.generate(shorterLength);
-        logger.info(hash);
-//todo  декодирование строки нужно?
-//            String shorterString = URLDecoder.decode(shorter.getOriginalUrl());
-//            logger.info(shorterString);
-            ShortUrl shortUrl = ShortUrl.create(hash, original);
-            repository.save(shortUrl);
-            return shortUrl.getHash();
+        ShortUrl shortUrl = ShortUrl.create(hash, original);
+        repository.save(shortUrl);
+        return shortUrl.getHash();
     }
 
     public List<ShortUrl> getAll() {
         List<ShortUrl> shortUrls = repository.findAll();
-        logger.info(String.valueOf(shortUrls));
         return shortUrls;
+    }
+
+    public ShortUrl findByOriginal(String original) {
+        return repository.findByOriginalUrl(original);
     }
 
     public ShortUrl findByHash(String hash) {
