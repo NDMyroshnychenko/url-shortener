@@ -13,4 +13,5 @@ public interface ShortUrlRepository extends JpaRepository<ShortUrl, UUID> {
 
     void deleteByHash(String hash);
 
+    ShortUrl findByOriginalUrl(String original);
 }
