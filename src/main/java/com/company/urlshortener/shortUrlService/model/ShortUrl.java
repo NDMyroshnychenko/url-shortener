@@ -1,10 +1,12 @@
 package com.company.urlshortener.shortUrlService.model;
 
+import com.company.urlshortener.userService.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -16,6 +18,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Getter
 @Setter
 public class ShortUrl {
@@ -31,30 +34,22 @@ public class ShortUrl {
     @Column(name = "hash", nullable = false, unique = true)
     private String hash;
 
-    @Column(name = "original_url", unique = true)
+    @Column(name = "original_url")
     private String originalUrl;
 
     @Column(name = "created_at", columnDefinition = "TIMESTAMP")
     private ZonedDateTime createdAt;
 
-    public static ShortUrl create(String hash, String originalUrl) {
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "user_id", nullable = false, updatable = true)
+    private User user;
+
+    public static ShortUrl create(String hash, String originalUrl, User user) {
         return ShortUrl.builder()
                 .hash(hash)
                 .originalUrl(originalUrl)
                 .createdAt(ZonedDateTime.now())
+                .user(user)
                 .build();
     }
-
-    @Override
-    public String toString() {
-        return "ShortUrl{" +
-                "id=" + id +
-                ", hash='" + hash + '\'' +
-                ", originalUrl='" + originalUrl + '\'' +
-                ", createdAt=" + createdAt +
-                '}';
-    }
-
-    //    private User user;
-
 }

@@ -50,4 +50,7 @@ public class UserServiceImpl implements UserService {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
 
+    public User findByLogin(String login) {
+        return userRepository.findByLogin(login);
+    }
 }
