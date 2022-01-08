@@ -22,7 +22,7 @@ public class ShortUrlService {
         if (original == null) {
             return null;
         }
-        ShortUrl shortUrlByOriginal = findByOriginalAndUser(original, user);//todo by user
+        ShortUrl shortUrlByOriginal = findByOriginalAndUser(original, user);
 
         if (shortUrlByOriginal != null) {
             return shortUrlByOriginal.getHash();
@@ -32,11 +32,6 @@ public class ShortUrlService {
         ShortUrl shortUrl = ShortUrl.create(hash, original, user);
         repository.save(shortUrl);
         return shortUrl.getHash();
-    }
-
-    public List<ShortUrl> getAll() {
-        List<ShortUrl> shortUrls = repository.findAll();
-        return shortUrls;
     }
 
     public ShortUrl findByOriginalAndUser(String original, User user) {

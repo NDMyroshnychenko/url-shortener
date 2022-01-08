@@ -17,7 +17,6 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
-
 public class Role {
 
     @Id

@@ -9,7 +9,7 @@ public class CodeGenerator {
 
     public CodeGenerator() {
         this.randomStringGenerator = new RandomStringGenerator
-                .Builder().filteredBy(c -> isLatinLetterOrDigit(c))
+                .Builder().filteredBy(CodeGenerator::isLatinLetterOrDigit)
                 .build();
     }
 

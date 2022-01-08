@@ -41,7 +41,7 @@ public class ShortUrl {
     private ZonedDateTime createdAt;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "user_id", nullable = false, updatable = true)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     public static ShortUrl create(String hash, String originalUrl, User user) {
